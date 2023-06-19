@@ -1,0 +1,33 @@
+@font-face {
+    font-family: kumbh;
+    src: url(./fonts/KumbhSans-Regular.ttf);
+}
+
+@font-face {
+    font-family: kumbh-bold;
+    src: url(./fonts/KumbhSans-Bold.ttf);
+}
+
+body {
+    font-family: kumbh;
+}
+
+h6 {
+    font-family: kumbh-bold;
+}
+
+.buttom-theme {
+    background-color: #5964E0;
+    outline: none;
+    color: white;
+    border: none;
+    padding: 10px 35px;
+}
+
+.buttom-theme:hover {
+    background-color: #939BF4;
+}
+
+.grey {
+    color: grey
+}
