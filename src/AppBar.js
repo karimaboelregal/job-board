@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -14,7 +14,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Checkbox from '@mui/material/Checkbox';
 
-export default function AppBar({ search, data, setSearch }) {
+export default function AppBar({ search, data, setSearch, setLocationSearch }) {
     const { theme, setTheme } = useContext(ThemeContext);
 
     const themeData = useTheme();
@@ -49,19 +49,21 @@ export default function AppBar({ search, data, setSearch }) {
                     <DarkModeIcon />
                 </Box>
             </Box>
-            {search ? <InputGroup theme={themeData} setSearch={setSearch} /> : <OffsetBar picture={data.thumbnail} name={data.company_name} cLink={data.related_links[0].text} theme={themeData} />}
+            {search ? <InputGroup setLocationSearch={setLocationSearch} theme={themeData} setSearch={setSearch} /> : <OffsetBar picture={data.thumbnail} name={data.company_name} cLink={data.related_links[0].text} theme={themeData} />}
         </Box>
 
     );
 }
 
-function InputGroup({ theme, setSearch }) {
+function InputGroup({ theme, setSearch, setLocationSearch }) {
 
     const [searchV, setSearchV] = useState("");
+    const [locationSearch, setLocationSearchh] = useState("");
     const submitSearch = () => {
-        setSearch(searchV)
+        setSearch(searchV);
+        setLocationSearch(locationSearch);
     }
-    
+
     return (
         <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
             <Box sx={{ position: "absolute", height: "70px", display: "flex", background: theme.cardColor, alignItems: "center", color: "black", width: { "md": "60%", sm: "80%" }, borderRadius: "10px" }}>
@@ -81,6 +83,7 @@ function InputGroup({ theme, setSearch }) {
                     <LocationOnIcon sx={{ color: theme.primary }} />
                     <InputBase
                         sx={{ ml: 1, flex: 1, color: theme.textColor }}
+                        onChange = {(v) => {setLocationSearchh(v.target.value)}}
                         placeholder="Search Google Maps"
                         inputProps={{ 'aria-label': 'search google maps' }}
                     />
@@ -112,7 +115,7 @@ function OffsetBar({ picture, name, cLink, theme }) {
         <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
             <Box sx={{ position: "absolute", display: "flex", background: theme.cardColor, alignItems: "center", color: "black", width: "60%", borderRadius: "10px", justifyContent: "space-between" }}>
                 <Box sx={{ display: "flex", gap: "30px", alignItems: "center" }}>
-                    <img src={picture === undefined ? "https://previews.123rf.com/images/urfandadashov/urfandadashov1804/urfandadashov180400262/99679816-world-placeholder-company-logo-design-template-business-corporate-vector-icon.jpg" : picture} width={100} height={100} />
+                    <img alt="pic" src={picture === undefined ? "https://previews.123rf.com/images/urfandadashov/urfandadashov1804/urfandadashov180400262/99679816-world-placeholder-company-logo-design-template-business-corporate-vector-icon.jpg" : picture} width={100} height={100} />
                     <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
                         <h6 style={{ color: theme.textColor }}>{name}</h6>
                         <span style={{ color: "grey", fontSize: "14px" }}>{cLink}</span>

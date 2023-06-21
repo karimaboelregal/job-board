@@ -4,15 +4,14 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
-import { Typography } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 
 
-export default function CardList({ search }) {
+export default function CardList({ search, location }) {
     const [data, setData] = useState([]);
     const [page, setCurrentPage] = useState(0);
     const [loading, setLoading] = useState(false);
-    const url = "https://cors-anywhere.herokuapp.com/https://serpapi.com/search?engine=google_jobs&api_key=13250787aca12dd30410c232e0e61ece9cbd28061a9276b0e74e82e77c9fa7dc&q=" + (search === "" ? "developer" : search) + "&start=" + page * 10;
+    const url = "https://cors-anywhere.herokuapp.com/https://serpapi.com/search?engine=google_jobs&api_key=13250787aca12dd30410c232e0e61ece9cbd28061a9276b0e74e82e77c9fa7dc&q=" + (search === "" ? "developer" : search) + "&location="+location+"&start=" + page * 10;
     const theme = useTheme();
 
     const fetchUserData = () => {
@@ -44,7 +43,7 @@ export default function CardList({ search }) {
     useEffect(() => {
         setData([]);
         setLoading(true);
-    }, [search])
+    }, [search, location])
 
     useEffect(() => {
         if (data.length === 0) {

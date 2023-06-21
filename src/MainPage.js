@@ -52,15 +52,16 @@ const Theme = {
 
 
 export default function MainPage() {
-    const { theme, setTheme } = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
     const [searchV, setSearchV] = useState("");
+    const [locationSearch, setLocationSearch] = useState("");
 
     return (
         <ThemeProvider theme={Theme[theme]}>
             <CustomBox>
-                <AppBar search={true} setSearch={setSearchV}/>
+                <AppBar search={true} setSearch={setSearchV} setLocationSearch={setLocationSearch}/>
                 <Box sx={{ width: { md: "80%", sm: "90%" } }}>
-                    <CardList search={searchV}/>
+                    <CardList search={searchV} location={locationSearch}/>
                 </Box>
             </CustomBox>
         </ThemeProvider>
