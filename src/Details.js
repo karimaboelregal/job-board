@@ -1,7 +1,6 @@
 import './App.css';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
 import { ThemeProvider, styled, createTheme } from '@mui/material/styles';
 import { useContext, useState } from 'react';
 import AppBar from "./AppBar.js";
@@ -70,9 +69,9 @@ export default function Details() {
         <ThemeProvider theme={Theme[theme]}>
             <CustomBox>
                 <AppBar search={false} data={state.data} />
-                <Box sx={{ width: "100%", paddingBottom: "150px", marginTop: "80px", display: "flex", justifyContent: "center" }}>
-                    <Box sx={{ display: "flex", flexDirection: "column", paddingY: "30px", paddingX: "70px", background: Theme[theme].cardColor, color: "black", width: "60%", borderRadius: "10px", justifyContent: "space-between" }}>
-                        <Box sx={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center" }}>
+                <Box sx={{ width: "100%", paddingBottom: "150px", marginTop: "150px", display: "flex", justifyContent: "center" }}>
+                    <Box sx={{ display: "flex", flexDirection: "column", paddingY: "30px", paddingX: {md: "70px", sm: "40px", xs: "20px"}, background: Theme[theme].cardColor, color: "black", width: {md: "60%", sm: "90%", xs: "90%"}, borderRadius: "10px", justifyContent: "space-between" }}>
+                        <Box sx={{ display: "flex", flexDirection: {md: "row", sm: "row", xs: "column", gap: "20px"}, width: "100%", justifyContent: "space-between", alignItems: "center" }}>
 
                             <Box>
                                 <Box sx={{ display: "flex", gap: "10px", color: "grey", flexWrap: "wrap", paddingY: "10px" }}>
@@ -129,7 +128,7 @@ export default function Details() {
                     </Box>
                 </Box>
                 <Box sx={{ position: "fixed", display: "flex", alignItems: "center", justifyContent: "center", bottom: 0, background: Theme[theme].cardColor, width: "100%", padding: "30px" }}>
-                    <Box sx={{display: "flex", width: "60%", height: "100%", alignItems: "center", justifyContent: "space-between"}}>
+                    <Box sx={{display: "flex", width: {md: "60%", sm: "90%", xs: "90%"}, height: "100%", alignItems: "center", justifyContent: "space-between"}}>
                         <Box sx={{ display: "flex", flexDirection: "column" }}>
                             <h6 style={{ color: Theme[theme].textColor }}>{data.title}</h6>
                             <Typography sx={{ color: "grey" }}>{data.company_name}</Typography>

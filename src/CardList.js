@@ -11,7 +11,7 @@ export default function CardList({ search, location }) {
     const [data, setData] = useState([]);
     const [page, setCurrentPage] = useState(0);
     const [loading, setLoading] = useState(false);
-    const url = "https://cors-anywhere.herokuapp.com/https://serpapi.com/search?engine=google_jobs&api_key=13250787aca12dd30410c232e0e61ece9cbd28061a9276b0e74e82e77c9fa7dc&q=" + (search === "" ? "developer" : search) + "&location="+location+"&start=" + page * 10;
+    const url = "https://cors-anywhere.herokuapp.com/https://serpapi.com/search?engine=google_jobs&api_key=4b8a2f9267c6f59fffe493f338e08124023d33b0fc833153a390503b9010a375&q=" + (search === "" ? "developer" : search) + "&location="+location+"&start=" + page * 10;
     const theme = useTheme();
 
     const fetchUserData = () => {
@@ -36,8 +36,10 @@ export default function CardList({ search, location }) {
     }
 
     useEffect(() => {
-        fetchUserData();
-        setLoading(true);
+        if (page !== 0) {
+            fetchUserData();
+            setLoading(true);    
+        }
     }, [page])
 
     useEffect(() => {
@@ -47,6 +49,7 @@ export default function CardList({ search, location }) {
 
     useEffect(() => {
         if (data.length === 0) {
+            // setData(JSON.parse(localStorage.getItem("data")))
             fetchUserData();
             setLoading(true);
         }
@@ -57,7 +60,7 @@ export default function CardList({ search, location }) {
             <Grid container spacing={5} gap={0.1} justifyContent={"center"} >
                 {data.map((value, index) => {
 
-                    return <Grid key={index} item xs={5} md={3} >
+                    return <Grid key={index} item xs={10} sm={5} md={3} >
                         <Card data={value} />
                     </Grid>
 
